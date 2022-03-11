@@ -6,7 +6,7 @@ import abi from "../../abi/WavePortal.json";
 const EthDApp = () => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [messageValue, setMessageValue] = useState("");
-  const [allWaves, setAllWaves] = useState([]);
+  const [allWaves, setAllWaves] = useState<any[]>([]); 
   console.log("currentAccount:", currentAccount);
   const contractAddress : string = process.env.NEXT_PUBLIC_WAVE_PORTAL_CONTRACT_ADDRESS as string;
 	//const contractAddress : string = "0xAef5F8bA1C33eE94AE99a50d10ab3f1D8aDB86F4";
@@ -15,7 +15,7 @@ const EthDApp = () => {
 
   const checkIfWalletIsConnected = async () => {
     try {
-      const { ethereum } = window;
+      const { ethereum } = window as any;
       if (!ethereum) {
         console.log("Ethereum object not found. Make sure you have metamask!");
         return ;
@@ -40,7 +40,7 @@ const EthDApp = () => {
 
   const connectWallet = async () => {
     try {
-      const { ethereum } = window;
+      const { ethereum } = window as any;
       if (!ethereum) {
         alert("Get Metamask");
         return ;
@@ -55,7 +55,7 @@ const EthDApp = () => {
 
   const wave = async () => {
     try {
-      const { ethereum } = window;
+      const { ethereum } = window as any;
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
@@ -79,7 +79,7 @@ const EthDApp = () => {
   }
 
   const getAllWaves = async () => {
-    const { ethereum } = window;
+    const { ethereum } = window as any;
 
     try {
       if (ethereum) {
@@ -88,7 +88,7 @@ const EthDApp = () => {
         const wavePortalContract = new ethers.Contract(contractAddress, contractABI, singer);
         const data = await wavePortalContract.getAllWaves();
         console.log(data);
-        const waves = data.map(wave => {
+        const waves = data.map((wave: { waver: any; timestamp: number; message: any; winning: any; }) => {
           return {
             address: wave.waver,
             timestamp: new Date(wave.timestamp * 1000),
@@ -106,6 +106,7 @@ const EthDApp = () => {
   }
 
   useEffect(() => {
+	const { ethereum } = window as any;
     let wavePortalContract: ethers.Contract;
 
     const onNewWave = (from: any, timestamp: number, message: any, winning: any) => {
@@ -120,8 +121,8 @@ const EthDApp = () => {
         },
       ]);
     };
-    if (window.ethereum) {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
+    if (ethereum) {
+      const provider = new ethers.providers.Web3Provider(ethereum);
       const singer = provider.getSigner();
 
       wavePortalContract = new ethers.Contract(contractAddress, contractABI, singer);
@@ -166,7 +167,6 @@ const EthDApp = () => {
         {currentAccount && (
           <textarea name="messageArea"
             placeholder="Enter a message"
-            type="text"
             id="message"
             value={messageValue}
             onChange={e => setMessageValue(e.target.value)}
