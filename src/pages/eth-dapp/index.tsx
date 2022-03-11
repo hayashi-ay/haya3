@@ -6,11 +6,10 @@ import abi from "../../abi/WavePortal.json";
 const EthDApp = () => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [messageValue, setMessageValue] = useState("");
-  const [allWaves, setAllWaves] = useState<any[]>([]); 
+  const [allWaves, setAllWaves] = useState<any[]>([]);
   console.log("currentAccount:", currentAccount);
-  const contractAddress : string = process.env.NEXT_PUBLIC_WAVE_PORTAL_CONTRACT_ADDRESS as string;
-	//const contractAddress : string = "0xAef5F8bA1C33eE94AE99a50d10ab3f1D8aDB86F4";
-	console.log("contractAddress:", contractAddress);
+  const contractAddress: string = process.env.NEXT_PUBLIC_WAVE_PORTAL_CONTRACT_ADDRESS as string;
+  console.log("contractAddress:", contractAddress);
   const contractABI = abi.abi;
 
   const checkIfWalletIsConnected = async () => {
@@ -18,7 +17,7 @@ const EthDApp = () => {
       const { ethereum } = window as any;
       if (!ethereum) {
         console.log("Ethereum object not found. Make sure you have metamask!");
-        return ;
+        return;
       } else {
         console.log("Ethereum object is found.", ethereum);
       }
@@ -27,7 +26,7 @@ const EthDApp = () => {
       console.log(accounts);
       if (accounts.length === 0) {
         console.log("No authorized account found");
-        return ;
+        return;
       }
       const account = accounts[0];
       console.log("An authorized account found.", account);
@@ -43,7 +42,7 @@ const EthDApp = () => {
       const { ethereum } = window as any;
       if (!ethereum) {
         alert("Get Metamask");
-        return ;
+        return;
       }
       const accounts = await ethereum.request({ method: "eth_requestAccounts" });
       console.log("Connected: ", accounts[0]);
@@ -64,7 +63,7 @@ const EthDApp = () => {
         console.log("Retrieved total wave count is", count.toNumber());
         console.log("Signer:", signer);
 
-        const waveTxn = await wavePortalContract.wave(messageValue, {gasLimit: 300000});
+        const waveTxn = await wavePortalContract.wave(messageValue, { gasLimit: 300000 });
         console.log("Mining...", waveTxn.hash);
         await waveTxn.wait();
         console.log("Mined --", waveTxn.hash);
@@ -106,7 +105,7 @@ const EthDApp = () => {
   }
 
   useEffect(() => {
-	const { ethereum } = window as any;
+    const { ethereum } = window as any;
     let wavePortalContract: ethers.Contract;
 
     const onNewWave = (from: any, timestamp: number, message: any, winning: any) => {
@@ -145,22 +144,22 @@ const EthDApp = () => {
 
       <div className="dataContainer">
         <div className="header">
-        <span role="img" aria-label="hand-wave">👋</span> WELCOME!
+          <span role="img" aria-label="hand-wave">👋</span> WELCOME!
         </div>
 
         <div className="bio">
-        イーサリアムウォレットを接続して、メッセージを作成したら、<span role="img" aria-label="hand-wave">👋</span>を送ってください<span role="img" aria-label="shine">✨</span>
+          イーサリアムウォレットを接続して、メッセージを作成したら、<span role="img" aria-label="hand-wave">👋</span>を送ってください<span role="img" aria-label="shine">✨</span>
         </div>
 
         {currentAccount && (
           <button className="waveButton" onClick={wave}>
-          Wave at Me
+            Wave at Me
           </button>
         )}
 
         {!currentAccount && (
           <button className="waveButton" onClick={connectWallet}>
-          Connect to Wallet
+            Connect to Wallet
           </button>
         )}
 
@@ -176,7 +175,7 @@ const EthDApp = () => {
         {currentAccount && (
           allWaves.slice(0).reverse().map((wave, index) => {
             return (
-              <div key={index} style={{ backgroundColor: "#f8f8ff", marginTop: "16px", padding: "8px"}}>
+              <div key={index} style={{ backgroundColor: "#f8f8ff", marginTop: "16px", padding: "8px" }}>
                 <div>Address: {wave.address}</div>
                 <div>Time: {wave.timestamp.toString()}</div>
                 <div>Message: {wave.message}</div>
