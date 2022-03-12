@@ -10,7 +10,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="p-4 flex flex-col justify-center">
+      <main className="p-4 flex flex-col justify-start min-h-screen">
         <h1 className="text-4xl text-center">
           Haya3
         </h1>
@@ -36,7 +36,10 @@ const Home: NextPage = () => {
         </div>
       </main >
 
-      <footer>
+      <footer className="p-2 flex justify-center border-t">
+        <a href="https://twitter.com/0__098" target="_blank" rel="noreferrer">
+          built on @0__098
+        </a>
       </footer>
     </div >
   )
