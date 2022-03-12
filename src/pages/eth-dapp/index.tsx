@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
-//import './eth-dapp.css';
 import abi from "../../abi/WavePortal.json";
 
 const EthDApp = () => {
@@ -138,12 +137,10 @@ const EthDApp = () => {
     checkIfWalletIsConnected();
   }, []);
 
-
   return (
     <div className="mainContainer">
-
       <div className="dataContainer">
-        <div className="header">
+        <div className="h-6 font-bold">
           <span role="img" aria-label="hand-wave">👋</span> WELCOME!
         </div>
 
