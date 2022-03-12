@@ -18,7 +18,7 @@ const Home: NextPage = () => {
 
         <p className="m-4 text-xl text-center leading-normal">
           My portfolio of web3 apps.<br />
-          You can see the source code <a className="text-blue-400" href="https://github.com/hayashi-ay/haya3" target="_blank">here</a>.
+          You can see the source code <a className="text-blue-400" href="https://github.com/hayashi-ay/haya3" target="_blank" rel="noreferrer">here</a>.
         </p>
         <div className="flex justify-center flex-wrap">
           <a href="eth-dapp" className="group m-4 p-6 max-w-xs border rounded-xl hover:border-blue-500">
