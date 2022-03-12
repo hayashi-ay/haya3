@@ -138,24 +138,24 @@ const EthDApp = () => {
   }, []);
 
   return (
-    <div className="flex items-center mt-16">
+    <div className="mt-16 w-full flex justify-center">
       <div className="flex flex-col justify-center">
         <div className="text-center text-4xl font-semibold">
           <span role="img" aria-label="hand-wave">👋</span> WELCOME!
         </div>
 
-        <div className="mt-4 text-center text-gray-500">
+        <div className="mt-4 text-center text-gray-600">
           イーサリアムウォレットを接続して、メッセージを作成したら、<span role="img" aria-label="hand-wave">👋</span>を送ってください<span role="img" aria-label="shine">✨</span>
         </div>
 
         {currentAccount && (
-          <button className="mt-4 p-2 border-0 bg-grey-100" onClick={wave}>
+          <button className="mt-4 p-2 border-0 bg-gray-100 rounded-md" onClick={wave}>
             Wave at Me
           </button>
         )}
 
         {!currentAccount && (
-          <button className="waveButton" onClick={connectWallet}>
+          <button className="mt-4 p-2 border-0 bg-gray-100 rounded-md" onClick={connectWallet}>
             Connect to Wallet
           </button>
         )}
@@ -163,6 +163,7 @@ const EthDApp = () => {
         {currentAccount && (
           <textarea name="messageArea"
             placeholder="Enter a message"
+            className="mt-4 p-2 text-gray-600 border border-solid border-gray-300 rounded"
             id="message"
             value={messageValue}
             onChange={e => setMessageValue(e.target.value)}
@@ -172,7 +173,7 @@ const EthDApp = () => {
         {currentAccount && (
           allWaves.slice(0).reverse().map((wave, index) => {
             return (
-              <div key={index} style={{ backgroundColor: "#f8f8ff", marginTop: "16px", padding: "8px" }}>
+              <div key={index} className="mt-4 px-6 py-3 bg-gray-100 rounded-md">
                 <div>Address: {wave.address}</div>
                 <div>Time: {wave.timestamp.toString()}</div>
                 <div>Message: {wave.message}</div>
