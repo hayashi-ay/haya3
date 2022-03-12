@@ -138,18 +138,18 @@ const EthDApp = () => {
   }, []);
 
   return (
-    <div className="mainContainer">
-      <div className="dataContainer">
-        <div className="h-6 font-bold">
+    <div className="flex items-center mt-16">
+      <div className="flex flex-col justify-center">
+        <div className="text-center text-4xl font-semibold">
           <span role="img" aria-label="hand-wave">👋</span> WELCOME!
         </div>
 
-        <div className="bio">
+        <div className="mt-4 text-center text-gray-500">
           イーサリアムウォレットを接続して、メッセージを作成したら、<span role="img" aria-label="hand-wave">👋</span>を送ってください<span role="img" aria-label="shine">✨</span>
         </div>
 
         {currentAccount && (
-          <button className="waveButton" onClick={wave}>
+          <button className="mt-4 p-2 border-0 bg-grey-100" onClick={wave}>
             Wave at Me
           </button>
         )}
