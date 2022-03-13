@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import Footer from '@organism/footer'
 
 const Home: NextPage = () => {
   return (
@@ -35,12 +36,7 @@ const Home: NextPage = () => {
           </a>
         </div>
       </main >
-
-      <footer className="p-2 flex justify-center border-t">
-        <a href="https://twitter.com/0__098" target="_blank" rel="noreferrer">
-          built on @0__098
-        </a>
-      </footer>
+      <Footer></Footer>
     </div >
   )
 }
