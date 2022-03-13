@@ -28,8 +28,8 @@ const Home: NextPage = () => {
             </p>
           </a>
 
-          <a href="" className="pointer-events-none group m-4 p-6 max-w-xs border rounded-xl hover:border-blue-500">
-            <h2 className="mb-4 text-2xl group-hover:text-blue-600">Coming soon...</h2>
+          <a href="eth-nft" className="group m-4 p-6 max-w-xs border rounded-xl hover:border-blue-500">
+            <h2 className="mb-4 text-2xl group-hover:text-blue-600">ETH NFT &rarr;</h2>
             <p className="text-xl leading-normal group-hover:text-blue-600">
               A super wonderful awesome NFT app.
             </p>
