@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Footer from '@organism/footer'
+import Footer from '@/organism/footer'
 
 const Home: NextPage = () => {
   return (
