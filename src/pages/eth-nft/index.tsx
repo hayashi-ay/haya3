@@ -10,6 +10,7 @@ const EthNFT = () => {
 
 	const {
 		makeAnEpicNFT,
+		setListenerForNFTMinted,
 	} = useMyEpicNFTContract()
 
 	const tryToMintNFT = async () => {
@@ -28,6 +29,12 @@ const EthNFT = () => {
 	useEffect(() => {
 		connectMetaMask()
 	}, [])
+
+	useEffect(() => {
+		if (account) {
+			setListenerForNFTMinted();
+		}
+	}, [account]);
 
 	return (
 		<div className="p-4 min-h-screen">

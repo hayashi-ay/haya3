@@ -6,12 +6,22 @@ const useMyEpicNFTContract = () => {
 	const contract = useContract(address, myEpicNFT.abi)
 
 	const makeAnEpicNFT = () => {
-		return contract?.makeAnEpicNFT();
+		return contract?.makeAnEpicNFT()
+	}
+
+	const setListenerForNFTMinted = () => {
+		contract?.on("NewEpicNFTMinted", (from, tokenId) => {
+			console.log(from, tokenId)
+			alert(
+				`https://testnets.opensea.io/assets/${address}/${tokenId.toNumber()}`
+			)
+		})
 	}
 
 	return {
-		makeAnEpicNFT
+		makeAnEpicNFT,
+		setListenerForNFTMinted
 	}
 }
 
-export default useMyEpicNFTContract;
+export default useMyEpicNFTContract
