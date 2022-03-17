@@ -37,18 +37,18 @@ const EthNFT = () => {
 	}, [account]);
 
 	return (
-		<div className="p-4 min-h-screen">
-			<div>
-				<p>My NFT Collection</p>
-				<p>Mint your own special NFT💫</p>
+		<div className="p-8 min-h-screen">
+			<div className="flex flex-col justify-center items-center">
+				<p className="text-center text-5xl font-semibold">My NFT Collection</p>
+				<p className="my-4 text-center text-2xl">Mint your own special NFT💫</p>
 
 				{!account && (
-					<button className="mt-4 p-2 border-0 bg-gray-100 rounded-md" onClick={connectMetaMask}>
+					<button className="px-4 h-11 w-32 text-xl border-0 bg-gray-100 rounded-md" onClick={connectMetaMask}>
 						Connect to Wallet
 					</button>
 				)}
 				{account && (
-					<button className="mt-4 p-2 border-0 bg-gray-100 rounded-md" onClick={tryToMintNFT}>
+					<button className="px-4 h-11 w-32 text-xl border-0 bg-gray-100 rounded-md" onClick={tryToMintNFT}>
 						Mint NFT
 					</button>
 				)}
