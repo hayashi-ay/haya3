@@ -13,6 +13,8 @@ const EthNFT = () => {
 	const {
 		makeAnEpicNFT,
 		setListenerForNFTMinted,
+		tokenId,
+		address,
 	} = useMyEpicNFTContract()
 
 	const tryToMintNFT = async () => {
@@ -47,12 +49,12 @@ const EthNFT = () => {
 				<p className="text-center text-5xl font-semibold">My NFT Collection</p>
 				<p className="my-4 text-center text-2xl">Mint your own special NFT💫</p>
 
-				{!account && (
+				{!account && !tokenId && (
 					<button className="px-4 h-11 w-32 text-xl border-0 bg-gray-100 rounded-md" onClick={connectMetaMask}>
 						Connect to Wallet
 					</button>
 				)}
-				{account && (
+				{account && !tokenId && (
 					<button disabled={isMinting} className="px-4 inline-flex items-center justify-center h-11 w-36 text-xl border-0 bg-gray-100 rounded-md" onClick={tryToMintNFT}>
 						{isMinting && (
 							<svg className="animate-spin h-5 w-5 mr-2" viewBox="0 0 24 24">
@@ -62,6 +64,14 @@ const EthNFT = () => {
 						)}
 						{isMinting ? "Minting..." : "Mint NFT"}
 					</button>
+				)}
+				{tokenId && (
+					<div className="text-xl text-center">
+						<span>Thanks for minting.<br />You can see your NFT&nbsp;</span>
+						<a href={`https://testnets.opensea.io/assets/${address}/${tokenId}`} target="_blank" rel="noreferrer" className="underline text-blue-300">
+							here
+						</a>
+					</div>
 				)}
 			</div>
 		</div>
