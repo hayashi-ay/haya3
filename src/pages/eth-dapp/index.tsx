@@ -138,50 +138,52 @@ const EthDApp = () => {
   }, []);
 
   return (
-    <div className="mt-16 w-full flex justify-center">
-      <div className="flex flex-col justify-center">
-        <div className="text-center text-4xl font-semibold">
-          <span role="img" aria-label="hand-wave">👋</span> WELCOME!
+    <div className="min-h-screen">
+      <div className="mt-16 w-full flex justify-center">
+        <div className="flex flex-col justify-center">
+          <div className="text-center text-4xl font-semibold">
+            <span role="img" aria-label="hand-wave">👋</span> WELCOME!
+          </div>
+
+          <div className="mt-4 text-center text-gray-600">
+            イーサリアムウォレットを接続して、メッセージを作成したら、<span role="img" aria-label="hand-wave">👋</span>を送ってください<span role="img" aria-label="shine">✨</span>
+          </div>
+
+          {currentAccount && (
+            <button className="mt-4 p-2 border-0 bg-gray-100 rounded-md" onClick={wave}>
+              Wave at Me
+            </button>
+          )}
+
+          {!currentAccount && (
+            <button className="mt-4 p-2 border-0 bg-gray-100 rounded-md" onClick={connectWallet}>
+              Connect to Wallet
+            </button>
+          )}
+
+          {currentAccount && (
+            <textarea name="messageArea"
+              placeholder="Enter a message"
+              className="mt-4 p-2 text-gray-600 border border-solid border-gray-300 rounded"
+              id="message"
+              value={messageValue}
+              onChange={e => setMessageValue(e.target.value)}
+            />
+          )}
+
+          {currentAccount && (
+            allWaves.slice(0).reverse().map((wave, index) => {
+              return (
+                <div key={index} className="mt-4 px-6 py-3 bg-gray-100 rounded-md">
+                  <div>Address: {wave.address}</div>
+                  <div>Time: {wave.timestamp.toString()}</div>
+                  <div>Message: {wave.message}</div>
+                  <div>Winning: {ethers.utils.formatEther(wave.winning)} ether</div>
+                </div>
+              )
+            })
+          )}
         </div>
-
-        <div className="mt-4 text-center text-gray-600">
-          イーサリアムウォレットを接続して、メッセージを作成したら、<span role="img" aria-label="hand-wave">👋</span>を送ってください<span role="img" aria-label="shine">✨</span>
-        </div>
-
-        {currentAccount && (
-          <button className="mt-4 p-2 border-0 bg-gray-100 rounded-md" onClick={wave}>
-            Wave at Me
-          </button>
-        )}
-
-        {!currentAccount && (
-          <button className="mt-4 p-2 border-0 bg-gray-100 rounded-md" onClick={connectWallet}>
-            Connect to Wallet
-          </button>
-        )}
-
-        {currentAccount && (
-          <textarea name="messageArea"
-            placeholder="Enter a message"
-            className="mt-4 p-2 text-gray-600 border border-solid border-gray-300 rounded"
-            id="message"
-            value={messageValue}
-            onChange={e => setMessageValue(e.target.value)}
-          />
-        )}
-
-        {currentAccount && (
-          allWaves.slice(0).reverse().map((wave, index) => {
-            return (
-              <div key={index} className="mt-4 px-6 py-3 bg-gray-100 rounded-md">
-                <div>Address: {wave.address}</div>
-                <div>Time: {wave.timestamp.toString()}</div>
-                <div>Message: {wave.message}</div>
-                <div>Winning: {ethers.utils.formatEther(wave.winning)} ether</div>
-              </div>
-            )
-          })
-        )}
       </div>
     </div>
   );
