@@ -50,7 +50,7 @@ const EthNFT = () => {
 				<p className="my-4 text-center text-2xl">Mint your own special NFT💫</p>
 
 				{!account && !tokenId && (
-					<button className="px-4 h-11 w-32 text-xl border-0 bg-gray-100 rounded-md" onClick={connectMetaMask}>
+					<button className="px-4 h-11 w-auto text-xl border-0 bg-gray-100 rounded-md" onClick={connectMetaMask}>
 						Connect to Wallet
 					</button>
 				)}
