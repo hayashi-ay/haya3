@@ -1,17 +1,23 @@
 import Button from "@/components/atoms/button";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import useMetaMask from "src/hooks/useMetaMask";
 
 const NFTGame = () => {
-
 	const {
 		account,
+		chainId,
 		connectMetaMask
 	} = useMetaMask()
 
 	useEffect(() => {
 		connectMetaMask();
 	}, [])
+
+	useEffect(() => {
+		if (chainId && chainId != 4) {
+			alert("Make sure to connect Rinkeby Test Network")
+		}
+	}, [chainId])
 
 	const SelectCharacter = () => {
 		return (

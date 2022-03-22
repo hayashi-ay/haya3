@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 const useMetaMask = () => {
 	const [account, setAccount] = useState<string>();
+	const [chainId, setChainId] = useState<number>();
 
 	const connectMetaMask = async () => {
 		try {
@@ -10,6 +11,7 @@ const useMetaMask = () => {
 				return;
 			const accounts = await window.ethereum.request({ method: "eth_requestAccounts" })
 			setAccount(accounts[0])
+			setChainId(Number(ethereum.networkVersion))
 		} catch (e) {
 			console.log(e)
 		}
@@ -17,6 +19,7 @@ const useMetaMask = () => {
 
 	return {
 		account,
+		chainId,
 		connectMetaMask,
 	}
 }
