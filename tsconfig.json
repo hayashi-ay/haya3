@@ -22,6 +22,9 @@
     "paths": {
       "@/organism/*": [
         "src/components/organism/*"
+      ],
+      "@/components/*": [
+        "src/components/*"
       ]
     },
   },
