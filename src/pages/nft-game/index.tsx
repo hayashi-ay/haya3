@@ -45,20 +45,24 @@ const NFTGame = () => {
 		);
 	};
 
+	const renderContent = () => {
+		if (!account) {
+			return (
+				<Button btnTxt="Connect wallet to get started" onClick={connectMetaMask}></Button>
+			)
+		} else if (characterNFT === null) {
+			return renderSelectCharacter();
+		} else {
+			return ("TODO: render arena")
+		}
+	}
+
 	return (
 		<div className="p-8 min-h-screen">
 			<div className="flex flex-col justify-center items-center">
 				<p className="text-center text-5xl font-semibold">⚡️ METAVERSE GAME ⚡️</p>
 				<p className="my-4 text-center text-2xl">Team up to beat the Boss</p>
-				{!account && (
-					<Button btnTxt="Connect wallet to get started" onClick={connectMetaMask}></Button>
-				)}
-				{account && characterNFT === null && (
-					renderSelectCharacter()
-				)}
-				{account && characterNFT && (
-					"TODO: render arena"
-				)}
+				{renderContent()}
 			</div>
 		</div>
 	)
