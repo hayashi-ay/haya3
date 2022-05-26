@@ -26,6 +26,14 @@ const Home: NextPage = () => {
           </p>
         </a>
       </div>
+      <div className="flex justify-center flex-wrap">
+        <a href="nft-game" className="group m-4 p-6 max-w-xs border rounded-xl hover:border-blue-500">
+          <h2 className="mb-4 text-2xl group-hover:text-blue-600">ETH NFT-game &rarr;</h2>
+          <p className="text-xl leading-normal group-hover:text-blue-600">
+            A super funny NFT game on ethereum network.
+          </p>
+        </a>
+      </div>
     </main >
   )
 }
