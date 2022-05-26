@@ -4,6 +4,8 @@ import { useEffect, useState } from "react"
 import { CharacterData } from "src/types/nft-game"
 import useMetaMask from "./useMetaMask"
 
+type nftMintedCallbackFunc = (sender: any, tokenId: any, characterIndex: any) => void
+
 const toCharacterData = (data: any) => {
 	return {
 		name: data.name,
@@ -40,10 +42,18 @@ const useMyEpicGameContract = () => {
 		setDefaultCharacters(characters)
 	}
 
-	const mintCharacterNFT = (characterId: any) => async () => {
+	const mintCharacterNFT = (characterId: any) => async (characterId: any) => {
 		console.log("here")
 		const txn = await contract?.mintCharacterNFT(characterId)
 		console.log(txn)
+	}
+
+	const setListenerForNFTMinted = (func: nftMintedCallbackFunc) => {
+		contract?.on("CharacterNFTMinted", func);
+	}
+
+	const unsetListenerForNFTMinted = (func: nftMintedCallbackFunc) => {
+		contract?.off("CharacterNFTMinted", func);
 	}
 
 	useEffect(() => {
@@ -51,18 +61,27 @@ const useMyEpicGameContract = () => {
 		getDefaultCharacters()
 	}, [account])
 
-	//const setListenerForNFTMinted = () => {
-	//	contract?.on("NewEpicNFTMinted", (from, tokenId) => {
-	//		console.log(from, tokenId)
-	//		setTokenId(tokenId)
-	//	})
-	//}
+	//index.js
+	//// イベントを受信したときに起動するコールバックメソッド onCharacterMint を追加します。
+	//const onCharacterMint = async (sender, tokenId, characterIndex) => {
+	//  console.log(
+	//    `CharacterNFTMinted - sender: ${sender} tokenId: ${tokenId.toNumber()} characterIndex: ${characterIndex.toNumber()}`
+	//  );
+	//  // NFT キャラクターが Mint されたら、コントラクトからメタデータを受け取り、アリーナ（ボスとのバトルフィールド）に移動するための状態に設定します。
+	//  if (gameContract) {
+	//    const characterNFT = await gameContract.checkIfUserHasNFT();
+	//    console.log("CharacterNFT: ", characterNFT);
+	//    setCharacterNFT(transformCharacterData(characterNFT));
+	//  }
+	//};
 
 	return {
 		characterNFT,
 		defaultCharacters,
 		address,
 		mintCharacterNFT,
+		setListenerForNFTMinted,
+		unsetListenerForNFTMinted,
 	}
 }
 

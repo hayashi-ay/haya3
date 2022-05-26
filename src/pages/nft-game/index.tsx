@@ -1,4 +1,5 @@
 import Button from "@/components/atoms/button";
+import SelectCharacter from "@/components/nft-game/SelectCharacter";
 import { useEffect, useState } from "react";
 import useMetaMask from "src/hooks/useMetaMask";
 import useMyEpicGameContract from "src/hooks/useMyEpicGameContract";
@@ -26,32 +27,13 @@ const NFTGame = () => {
 		}
 	}, [chainId])
 
-	const renderSelectCharacter = () => {
-		return (
-			<div className="flex flex-col items-center">
-				<h2 className="text-xl">Mint your character.</h2>
-				<div className="m-4 flex flex-row">
-					{defaultCharacters.map((character, index) => (
-						<div className="m-8 relative" key={character.name}>
-							<div className="absolute bg-gray-100 rounded-xl">
-								<p className="px-4 py-2 text-xl font-bold">{character.name}</p>
-							</div>
-							<img className="w-64 h-64 z-10 object-cover" src={character.imageURI} alt={character.name}></img>
-							<button onClick={mintCharacterNFT(index)} className="absolute z-20 bottom-0 w-full h-10 text-xl font-bold bg-gray-200 rounded-b-lg">{`Mint ${character.name}`}</button>
-						</div>
-					))}
-				</div>
-			</div>
-		);
-	};
-
 	const renderContent = () => {
 		if (!account) {
 			return (
 				<Button btnTxt="Connect wallet to get started" onClick={connectMetaMask}></Button>
 			)
-		} else if (characterNFT === null) {
-			return renderSelectCharacter();
+		} else if (characterNFT !== null) {
+			return (<SelectCharacter></SelectCharacter>)
 		} else {
 			return ("TODO: render arena")
 		}
