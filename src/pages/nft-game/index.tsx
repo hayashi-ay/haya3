@@ -1,4 +1,5 @@
 import Button from "@/components/atoms/button";
+import Arena from "@/components/nft-game/Arena";
 import SelectCharacter from "@/components/nft-game/SelectCharacter";
 import { useEffect, useState } from "react";
 import useMetaMask from "src/hooks/useMetaMask";
@@ -32,10 +33,10 @@ const NFTGame = () => {
 			return (
 				<Button btnTxt="Connect wallet to get started" onClick={connectMetaMask}></Button>
 			)
-		} else if (characterNFT !== null) {
+		} else if (characterNFT === null) {
 			return (<SelectCharacter></SelectCharacter>)
 		} else {
-			return ("TODO: render arena")
+			return (<Arena></Arena>)
 		}
 	}
 

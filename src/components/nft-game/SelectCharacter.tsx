@@ -18,7 +18,7 @@ const SelectCharacter = () => {
 
 	useEffect(() => {
 		setListenerForNFTMinted(onCharacterMint)
-		// useEffectの帰り値はunmounted時に実行される
+		// useEffectの返り値はunmounted時に実行される
 		return () => {
 			console.log('unmount')
 			unsetListenerForNFTMinted(onCharacterMint);
