@@ -40,6 +40,12 @@ const useMyEpicGameContract = () => {
 		setDefaultCharacters(characters)
 	}
 
+	const mintCharacterNFT = (characterId: any) => async () => {
+		console.log("here")
+		const txn = await contract?.mintCharacterNFT(characterId)
+		console.log(txn)
+	}
+
 	useEffect(() => {
 		fetchNFTMetadata()
 		getDefaultCharacters()
@@ -56,6 +62,7 @@ const useMyEpicGameContract = () => {
 		characterNFT,
 		defaultCharacters,
 		address,
+		mintCharacterNFT,
 	}
 }
 

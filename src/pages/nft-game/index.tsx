@@ -13,6 +13,7 @@ const NFTGame = () => {
 	const {
 		characterNFT,
 		defaultCharacters,
+		mintCharacterNFT,
 	} = useMyEpicGameContract()
 
 	useEffect(() => {
@@ -36,7 +37,7 @@ const NFTGame = () => {
 								<p className="px-4 py-2 text-xl font-bold">{character.name}</p>
 							</div>
 							<img className="w-64 h-64 z-10 object-cover" src={character.imageURI} alt={character.name}></img>
-							<button className="absolute z-20 bottom-0 w-full h-10 text-xl font-bold bg-gray-200 rounded-b-lg">{`Mint ${character.name}`}</button>
+							<button onClick={mintCharacterNFT(index)} className="absolute z-20 bottom-0 w-full h-10 text-xl font-bold bg-gray-200 rounded-b-lg">{`Mint ${character.name}`}</button>
 						</div>
 					))}
 				</div>
