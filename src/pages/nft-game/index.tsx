@@ -52,8 +52,11 @@ const NFTGame = () => {
 				{!account && (
 					<Button btnTxt="Connect wallet to get started" onClick={connectMetaMask}></Button>
 				)}
-				{account && (
+				{account && characterNFT === null && (
 					renderSelectCharacter()
+				)}
+				{account && characterNFT && (
+					"TODO: render arena"
 				)}
 			</div>
 		</div>
