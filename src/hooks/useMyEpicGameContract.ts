@@ -22,6 +22,7 @@ const useMyEpicGameContract = () => {
 
 	const [characterNFT, setCharacterNFT] = useState<CharacterData | null>(null)
 	const [defaultCharacters, setDefaultCharacters] = useState<CharacterData[]>([])
+	const [boss, setBoss] = useState<CharacterData | null>(null)
 
 	const { account } = useMetaMask()
 
@@ -40,6 +41,12 @@ const useMyEpicGameContract = () => {
 		console.log(txn)
 		const characters = txn.map((data: any) => toCharacterData(data))
 		setDefaultCharacters(characters)
+	}
+
+	const fetchBoss = async () => {
+		const txn = await contract?.getBigBoss()
+		console.log(txn)
+		setBoss(toCharacterData(txn))
 	}
 
 	const mintCharacterNFT = (characterId: any) => async (characterId: any) => {
@@ -61,6 +68,13 @@ const useMyEpicGameContract = () => {
 		getDefaultCharacters()
 	}, [account])
 
+	useEffect(() => {
+		// 負荷軽減のためにNFTを所有しているときだけ取得する
+		if (characterNFT !== null) {
+			fetchBoss()
+		}
+	}, [characterNFT])
+
 	//index.js
 	//// イベントを受信したときに起動するコールバックメソッド onCharacterMint を追加します。
 	//const onCharacterMint = async (sender, tokenId, characterIndex) => {
@@ -78,6 +92,7 @@ const useMyEpicGameContract = () => {
 	return {
 		characterNFT,
 		defaultCharacters,
+		boss,
 		address,
 		mintCharacterNFT,
 		setListenerForNFTMinted,
