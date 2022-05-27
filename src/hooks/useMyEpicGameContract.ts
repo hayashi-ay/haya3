@@ -49,8 +49,12 @@ const useMyEpicGameContract = () => {
 		setBoss(toCharacterData(txn))
 	}
 
+	const attackBoss = async () => {
+		const txn = await contract?.attackBoss()
+		console.log(txn)
+	}
+
 	const mintCharacterNFT = (characterId: any) => async (characterId: any) => {
-		console.log("here")
 		const txn = await contract?.mintCharacterNFT(characterId)
 		console.log(txn)
 	}
@@ -75,25 +79,12 @@ const useMyEpicGameContract = () => {
 		}
 	}, [characterNFT])
 
-	//index.js
-	//// イベントを受信したときに起動するコールバックメソッド onCharacterMint を追加します。
-	//const onCharacterMint = async (sender, tokenId, characterIndex) => {
-	//  console.log(
-	//    `CharacterNFTMinted - sender: ${sender} tokenId: ${tokenId.toNumber()} characterIndex: ${characterIndex.toNumber()}`
-	//  );
-	//  // NFT キャラクターが Mint されたら、コントラクトからメタデータを受け取り、アリーナ（ボスとのバトルフィールド）に移動するための状態に設定します。
-	//  if (gameContract) {
-	//    const characterNFT = await gameContract.checkIfUserHasNFT();
-	//    console.log("CharacterNFT: ", characterNFT);
-	//    setCharacterNFT(transformCharacterData(characterNFT));
-	//  }
-	//};
-
 	return {
 		characterNFT,
 		defaultCharacters,
 		boss,
 		address,
+		attackBoss,
 		mintCharacterNFT,
 		setListenerForNFTMinted,
 		unsetListenerForNFTMinted,

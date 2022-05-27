@@ -4,10 +4,11 @@ const Arena = () => {
 	const {
 		characterNFT,
 		boss,
+		attackBoss,
 	} = useMyEpicGameContract()
 
 	const attackToBoss = async () => {
-		console.log('attack to boss')
+		attackBoss()
 	}
 
 	return (
