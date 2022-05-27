@@ -51,13 +51,21 @@ const useMyEpicGameContract = () => {
 	}
 
 	const attackBoss = async () => {
-		const txn = await contract?.attackBoss()
-		console.log(txn)
+		try {
+			const txn = await contract?.attackBoss()
+			console.log(txn)
+		} catch (e) {
+			console.log(e)
+		}
 	}
 
 	const mintCharacterNFT = (characterId: any) => async (characterId: any) => {
-		const txn = await contract?.mintCharacterNFT(characterId)
-		console.log(txn)
+		try {
+			const txn = await contract?.mintCharacterNFT(characterId)
+			console.log(txn)
+		} catch (e) {
+			console.log(e)
+		}
 	}
 
 	const setListenerForNFTMinted = (func: nftMintedCallbackFunc) => {
