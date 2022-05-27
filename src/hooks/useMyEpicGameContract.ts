@@ -108,8 +108,10 @@ const useMyEpicGameContract = () => {
 	}
 
 	useEffect(() => {
-		fetchNFTMetadata()
-		getDefaultCharacters()
+		if (account) {
+			fetchNFTMetadata()
+			getDefaultCharacters()
+		}
 	}, [account])
 
 	useEffect(() => {
