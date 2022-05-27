@@ -108,6 +108,9 @@ const useMyEpicGameContract = () => {
 	}
 
 	useEffect(() => {
+		// accoutがないときにも実行されて、以下のエラーが出る。ただif文をつけてしまうとその後の描画がうまくいかなくて放置する
+		// useStateが複数のコンポーネントにまたがる際だったりレンダリング周りの理解がもう少し必要
+		// Error: unknown account #0 (operation="getAddress", code=UNSUPPORTED_OPERATION, version=providers/5.6.0)
 		fetchNFTMetadata()
 		getDefaultCharacters()
 	}, [account])
