@@ -59,9 +59,10 @@ const useMyEpicGameContract = () => {
 		}
 	}
 
-	const mintCharacterNFT = (characterId: any) => async (characterId: any) => {
+	const mintCharacterNFT = async (characterId: any) => {
 		try {
 			const txn = await contract?.mintCharacterNFT(characterId)
+			await txn.wait()
 			console.log(txn)
 		} catch (e) {
 			console.log(e)
@@ -123,6 +124,7 @@ const useMyEpicGameContract = () => {
 		boss,
 		address,
 		attackBoss,
+		fetchNFTMetadata,
 		mintCharacterNFT,
 		setListenerForNFTMinted,
 		unsetListenerForNFTMinted,
