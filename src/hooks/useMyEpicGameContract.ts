@@ -53,6 +53,7 @@ const useMyEpicGameContract = () => {
 	const attackBoss = async () => {
 		try {
 			const txn = await contract?.attackBoss()
+			await txn.wait()
 			console.log(txn)
 		} catch (e) {
 			console.log(e)

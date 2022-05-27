@@ -1,7 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useMyEpicGameContract from "src/hooks/useMyEpicGameContract";
+import Loading from "../atoms/loading";
 
 const Arena = () => {
+	const [isLoading, setIsLoading] = useState<boolean>(false)
+
 	const {
 		characterNFT,
 		boss,
@@ -11,7 +14,9 @@ const Arena = () => {
 	} = useMyEpicGameContract()
 
 	const attackToBoss = async () => {
-		attackBoss()
+		setIsLoading(true)
+		await attackBoss()
+		setIsLoading(false)
 	}
 
 	useEffect(() => {
@@ -36,8 +41,9 @@ const Arena = () => {
 						</div>
 					</div>
 					<div>
-						<button onClick={attackToBoss} className="mt-4 w-9/12 h-10 text-xl font-bold bg-red-400 rounded-lg">
-							{`Attack ${boss.name}`}
+						<button onClick={attackToBoss} disabled={isLoading} className="inline-flex items-center justify-center mt-4 w-9/12 h-10 text-xl font-bold bg-red-400 rounded-lg">
+							{isLoading && (<Loading></Loading>)}
+							{isLoading ? 'Attacking' : `Attack ${boss.name}`}
 						</button>
 					</div>
 				</div>
