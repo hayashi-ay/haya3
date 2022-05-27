@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import useMyEpicGameContract from "src/hooks/useMyEpicGameContract";
 
 const Arena = () => {
@@ -5,11 +6,20 @@ const Arena = () => {
 		characterNFT,
 		boss,
 		attackBoss,
+		setListenerForAttackBoss,
+		unsetListenerForAttackBoss,
 	} = useMyEpicGameContract()
 
 	const attackToBoss = async () => {
 		attackBoss()
 	}
+
+	useEffect(() => {
+		setListenerForAttackBoss()
+		return () => {
+			unsetListenerForAttackBoss()
+		}
+	}, [])
 
 	return (
 		<div className="flex flex-col justify-center items-center text-center w-full">

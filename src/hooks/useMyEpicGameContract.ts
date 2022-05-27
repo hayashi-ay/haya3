@@ -5,6 +5,7 @@ import { CharacterData } from "src/types/nft-game"
 import useMetaMask from "./useMetaMask"
 
 type nftMintedCallbackFunc = (sender: any, tokenId: any, characterIndex: any) => void
+type AttackCompleteCallbackFunc = (newBossHp: any, newPlayerHp: any) => void
 
 const toCharacterData = (data: any) => {
 	return {
@@ -67,6 +68,35 @@ const useMyEpicGameContract = () => {
 		contract?.off("CharacterNFTMinted", func);
 	}
 
+	const onAttackCompleted = async (newBossHp: any, newPlayerHp: any) => {
+		const bossHp = newBossHp.toNumber();
+		const playerHp = newPlayerHp.toNumber();
+
+		setBoss((prev: CharacterData | null) => {
+			if (prev != null) {
+				return { ...prev, hp: bossHp }
+			} else {
+				return prev
+			}
+		})
+
+		setCharacterNFT((prev: CharacterData | null) => {
+			if (prev != null) {
+				return { ...prev, hp: playerHp }
+			} else {
+				return prev
+			}
+		})
+	}
+
+	const setListenerForAttackBoss = () => {
+		contract?.on("AttackComplete", onAttackCompleted)
+	}
+
+	const unsetListenerForAttackBoss = () => {
+		contract?.off("AttackComplete", onAttackCompleted)
+	}
+
 	useEffect(() => {
 		fetchNFTMetadata()
 		getDefaultCharacters()
@@ -88,6 +118,8 @@ const useMyEpicGameContract = () => {
 		mintCharacterNFT,
 		setListenerForNFTMinted,
 		unsetListenerForNFTMinted,
+		setListenerForAttackBoss,
+		unsetListenerForAttackBoss,
 	}
 }
 
