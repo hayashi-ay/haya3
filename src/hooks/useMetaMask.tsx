@@ -10,8 +10,10 @@ const useMetaMask = () => {
 			if (!ethereum)
 				return;
 			const accounts = await window.ethereum.request({ method: "eth_requestAccounts" })
-			setAccount(accounts[0])
-			setChainId(Number(ethereum.networkVersion))
+			if (accounts.length > 0) {
+				setAccount(accounts[0])
+				setChainId(Number(ethereum.networkVersion))
+			}
 		} catch (e) {
 			console.log(e)
 		}
