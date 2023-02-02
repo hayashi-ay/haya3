@@ -4,7 +4,7 @@ const Home: NextPage = () => {
   return (
     <main className="p-4 flex flex-col justify-start min-h-screen">
       <h1 className="text-4xl text-center">
-        Haya33
+        Haya3
       </h1>
 
       <p className="m-4 text-xl text-center leading-normal">
